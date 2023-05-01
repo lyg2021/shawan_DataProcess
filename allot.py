@@ -59,7 +59,7 @@ def allot(image_path: str, mask_path, train_percentage: float, path_list: list):
                             dst=os.path.join(path_list[2], name))
             shutil.copyfile(src=os.path.join(mask_path, name), 
                             dst=os.path.join(path_list[3], name))
-        print("\r allot{}/{}:{}".format(index+1, len(name_list), "▋"*(int((index+1)/len(name_list)*100)//2)),
+        print("\r allot:{}/{}:{}".format(index+1, len(name_list), "▋"*(int((index+1)/len(name_list)*100)//2)),
               "%{:.1f}".format((index+1)/len(name_list)*100),
               flush=True,
               end="")
@@ -69,14 +69,14 @@ def allot(image_path: str, mask_path, train_percentage: float, path_list: list):
 
 if __name__ == "__main__":
     # 输入路径
-    image_path = r"images_256"
-    mask_path = r"masks_256"
+    image_path = r"images_512"
+    mask_path = r"masks_512"
 
     # 训练集的百分比
     train_percentage = 0.6
 
     # 输出的数据集根目录
-    dataset_root = r"shawan_4fenlei_256"
+    dataset_root = r"shawan_4fenlei_512"
 
     path_list = make_dir(dataset_root=dataset_root)
 

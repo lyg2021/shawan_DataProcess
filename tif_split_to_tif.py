@@ -153,10 +153,10 @@ if __name__ == "__main__":
     big_tif_mask_path = "final_mask_4fenlei.tif"
 
     # 图片裁剪尺寸
-    crop_size = (256, 256)
+    crop_size = (512, 512)
     
     # 图片裁剪步长
-    stride = 128
+    stride = 256
 
     main(big_tif_image_path=big_tif_image_path,     # 原图路径
          big_tif_mask_path=big_tif_mask_path,       # 标签路径

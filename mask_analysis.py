@@ -3,12 +3,13 @@ from PIL import Image
 import numpy as np
 
 
-if __name__ == "__main__":
-
+def mask_analysis(mask_path:str):
+    """输入:标签所在路径
+        效果:
+    """
     # 图片所在路径
-    # mask_path = os.path.join("landcover", "ann_dir/test")
-    mask_path = r"shawan_4fenlei_256\ann_dir\val"
-
+    mask_path = mask_path
+    
     # 获取所有的mask图片名
     name_list = os.listdir(path=mask_path)
 
@@ -21,8 +22,10 @@ if __name__ == "__main__":
     # 所有图片分辨率的集合，用于判断是否有多种分辨率
     mask_shape_set = set()
 
+    # 各个像素值数量的字典
+    pixel_sum_dict = dict()
 
-    # 遍历这些图片，将它们都转化为tensor处理
+    # 遍历这些图片，将它们都转化为np.array处理
     for index, image_mask_name in enumerate(name_list):
 
         # 通过PIL.Image打开图片
@@ -42,6 +45,13 @@ if __name__ == "__main__":
         # 去重取值
         unique = np.unique(image_mask_array)
 
+        # 获取各个像素值数量的字典
+        for pixel_value in unique:
+            if pixel_value in pixel_sum_dict.keys():
+                pixel_sum_dict[pixel_value] += np.sum(image_mask_array == pixel_value)
+            else:
+                pixel_sum_dict[pixel_value] = np.sum(image_mask_array == pixel_value)
+
         # 将这个张量和全局变量unique_cat拼接，得到所有图片的不同值的集合
         unique_cat = np.concatenate((unique_cat, unique))
         print("\r{}/{}:{}".format(index+1, len(name_list), "▋"*(int((index+1)/len(name_list)*100)//2)),
@@ -58,3 +68,15 @@ if __name__ == "__main__":
     print("mask 标签的通道数为：", mask_channels_num_set)
     print("mask 标签的分辨率为：", mask_shape_set)
 
+    for key, value in pixel_sum_dict.items():
+        print(f"像素值{key}的占比为{value/(image_mask_array.size*len(name_list))*100:.3f}%")
+
+
+
+if __name__ == "__main__":
+
+    # 标签所在路径
+    mask_path = r"shawan_4fenlei_256\ann_dir\train"
+
+    mask_analysis(mask_path=mask_path)
+    

@@ -2,3 +2,6 @@
 /masks_256
 /shawan_4fenlei_256
 /*.tif
+/images_*
+/masks_*
+/shawan_*
