@@ -5,3 +5,5 @@
 /images_*
 /masks_*
 /shawan_*
+/tif_image
+*.pyc
