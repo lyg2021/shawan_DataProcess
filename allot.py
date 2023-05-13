@@ -69,14 +69,14 @@ def allot(image_path: str, mask_path, train_percentage: float, path_list: list):
 
 if __name__ == "__main__":
     # 输入路径
-    image_path = r"images_512"
-    mask_path = r"masks_512"
+    image_path = r"images_256"
+    mask_path = r"masks_256"
 
     # 训练集的百分比
     train_percentage = 0.6
 
     # 输出的数据集根目录
-    dataset_root = r"shawan_4fenlei_512"
+    dataset_root = r"shawan_6fenlei_256"
 
     path_list = make_dir(dataset_root=dataset_root)
 

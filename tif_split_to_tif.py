@@ -149,14 +149,14 @@ def main(big_tif_image_path:str, big_tif_mask_path:str, crop_size:tuple, stride:
 
 if __name__ == "__main__":
     # 输入路径
-    big_tif_image_path = "final_image_4fenlei.tif"
-    big_tif_mask_path = "final_mask_4fenlei.tif"
+    big_tif_image_path = "tif_image\splited_image_and_mask\image_part9.tif"
+    big_tif_mask_path = "tif_image\splited_image_and_mask\mask_part9.tif"
 
     # 图片裁剪尺寸
-    crop_size = (512, 512)
+    crop_size = (256, 256)
     
     # 图片裁剪步长
-    stride = 256
+    stride = 128
 
     main(big_tif_image_path=big_tif_image_path,     # 原图路径
          big_tif_mask_path=big_tif_mask_path,       # 标签路径

@@ -29,10 +29,11 @@ if __name__ == "__main__":
     只适用于一级目录
     """
 
-    dir_path1 = "images_512"
-    dir_path2 = "masks_512"
+    dir_path1 = "images_256"
+    dir_path2 = "masks_256"
 
     new_first_name = "210724-02"
+    # new_first_name = "part1"
     suffix_name = ".tif"
 
     rename(dir_path=dir_path1, new_first_name=new_first_name, suffix_name=suffix_name)

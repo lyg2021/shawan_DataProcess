@@ -74,8 +74,8 @@ def main(image_path:str, mask_path:str, percentage:float):
 if __name__ == "__main__":
 
     # 输入路径
-    image_path = "images_512"
-    mask_path = "masks_512"
+    image_path = "images_256"
+    mask_path = "masks_256"
 
     # 含0量超过这个比例就删了这标签
     percentage = 0.95
