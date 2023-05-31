@@ -76,7 +76,7 @@ def mask_analysis(mask_path:str):
 if __name__ == "__main__":
 
     # 标签所在路径
-    mask_path = r"shawan_6fenlei_256\ann_dir\train"
+    mask_path = r"masks_512"
 
     mask_analysis(mask_path=mask_path)
     
