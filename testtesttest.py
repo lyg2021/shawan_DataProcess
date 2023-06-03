@@ -59,7 +59,7 @@ def read_tif(tif_image_path: str):
 
 if __name__ == "__main__":
 
-    path = r"2023-05-31_111323.tif"
+    path = r"test2.tif"
     # path = r"final_image.tif"
 
     tif_array = read_tif(path)

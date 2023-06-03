@@ -61,4 +61,4 @@ if __name__ == "__main__":
     PALETTE = [[0, 0, 0], [44, 255, 28], [254, 254, 254], [246, 14, 14],
                [249, 255, 33], [74, 254, 254], [59, 0, 252]]
     
-    Convert_Palette("2023-05-31_111634.tif", PALETTE=PALETTE)
+    Convert_Palette("2023-05-31_221342.tif", PALETTE=PALETTE)

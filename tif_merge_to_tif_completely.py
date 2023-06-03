@@ -40,6 +40,7 @@ def get_tif_array_list(tif_path:str):
         返回:numpy数组的列表
     """
     tif_name_list = os.listdir(tif_path)
+    tif_name_list.sort()
     tif_array_list = []
 
     for tif_name in tif_name_list:
@@ -71,8 +72,8 @@ def merge_tif(tif_array_list: list, height:int, width:int):
                     bar_shape_tif_array_list.append(bar_shape_tif_array)
                     bar_shape_tif_array = tif_array
 
-            elif len(tif_array.shape) == 3:   # 三维数组(C, H, W)
-                if bar_shape_tif_array.shape[1] < width:
+            elif len(bar_shape_tif_array.shape) == 3:   # 三维数组(C, H, W)
+                if bar_shape_tif_array.shape[2] < width:
                     bar_shape_tif_array = np.concatenate((bar_shape_tif_array, tif_array), axis=2)
                     if index == len(tif_array_list)-1:
                         bar_shape_tif_array_list.append(bar_shape_tif_array)
@@ -81,6 +82,10 @@ def merge_tif(tif_array_list: list, height:int, width:int):
                     bar_shape_tif_array = tif_array
             else:
                 print("不对劲，这输入的数组不是二维也不是三维")
+        print("\r合成进度:{}/{}:{}".format(index+1, len(tif_array_list), "▋"*(int((index+1)/len(tif_array_list)*100)//2)),
+              "%{:.1f}".format((index+1)/len(tif_array_list)*100),
+              flush=True,
+              end="")
 
     for index, bar_shape_tif_array in enumerate(bar_shape_tif_array_list):
         if len(bar_shape_tif_array.shape) == 2:     # 二维数组(H, W)
@@ -124,51 +129,33 @@ def main(tif_dir:str, height:int, width:int):
 
     tif_name = time.strftime("%Y-%m-%d_%H%M%S", time.localtime())
 
-    # 保存tif文件(原图)
-    metadata = {
-        'driver': 'GTiff',
-        'width': width,
-        'height': height,
-        'count': 1,
-        'dtype': np.uint8
-    }
-    save_array_as_tif(matrix=big_tif_array,
-                      path=f"./{tif_name}.tif",
-                      profile=metadata)
+    if len(big_tif_array.shape) == 2:        
+        metadata = {
+            'driver': 'GTiff',
+            'width': width,
+            'height': height,
+            'count': 1,
+            'dtype': np.uint8
+        }
+    elif len(big_tif_array.shape) == 3:
+        metadata = {
+            'driver': 'GTiff',
+            'width': width,
+            'height': height,
+            'count': 4,
+            'dtype': np.uint16
+        }
 
-    # for index, tif_array in enumerate(image_tif_array_list):
-    #     metadata["width"] = tif_array.shape[2]
-    #     metadata["height"] = tif_array.shape[1]
-    #     save_array_as_tif(tif_array, os.path.join(
-    #         save_image_path_root, f"{index}.tif"), metadata)
-    #     print("\r保存进度(原图):{}/{}:{}".format(index+1, len(image_tif_array_list), "▋"*(int((index+1)/len(image_tif_array_list)*100)//2)),
-    #           "%{:.1f}".format((index+1)/len(image_tif_array_list)*100),
-    #           flush=True,
-    #           end="")
-        
-    # # 保存tif文件(标签)
-    # metadata = {
-    #     'driver': 'GTiff',
-    #     'width': image_size[1],
-    #     'height': image_size[0],
-    #     'count': 1,
-    #     'dtype': np.uint8
-    # }
-    # for index, tif_array in enumerate(mask_tif_array_list):
-    #     metadata["width"] = tif_array.shape[1]
-    #     metadata["height"] = tif_array.shape[0]
-    #     save_array_as_tif(tif_array, os.path.join(
-    #         save_mask_path_root, f"{index}.tif"), metadata)
-    #     print("\r保存进度(标签):{}/{}:{}".format(index+1, len(mask_tif_array_list), "▋"*(int((index+1)/len(mask_tif_array_list)*100)//2)),
-    #           "%{:.1f}".format((index+1)/len(mask_tif_array_list)*100),
-    #           flush=True,
-    #           end="")
+    # 保存tif文件(原图)
+    save_array_as_tif(matrix=big_tif_array,
+                    path=f"./{tif_name}.tif",
+                    profile=metadata)
 
 
 if __name__ == "__main__":
 
     
-    main(tif_dir="masks_512",
+    main(tif_dir=r"C:\Users\yiguolu\Desktop\ww_SegNext",
          height=7239,
          width=13812)
 

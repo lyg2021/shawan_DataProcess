@@ -27,7 +27,9 @@ def read_tif(tif_image_path: str):
     # shape:(channels, height, width)
     # print(
     #     f"shape:{big_tif_array.shape}, max:{big_tif_array.max()}, \nunique:{np.unique(big_tif_array)}")
+    
     return big_tif_array
+    # return np.uint8(big_tif_array)
 
 
 
@@ -78,12 +80,13 @@ if __name__ == "__main__":
     
     dict_tuple = main(tif_dir="images_256")
 
+    # for key in dict_tuple[0]:
+    #     dict_tuple[0][key] /= 255
+    
+    # for key in dict_tuple[1]:
+    #     dict_tuple[1][key] /= 255
+
     print(f"\n mean:{dict_tuple[0]} \n std:{dict_tuple[1]}")
 
-    # a = list(range(1, 37))
-    # a = np.asarray(a)
-    # a = a.reshape(4, 3, 3)
-    # # a = a[0,:,:]
-    # print(np.shape(a)[0])
 
     

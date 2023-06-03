@@ -147,7 +147,7 @@ def main(big_tif_image_path:str, big_tif_mask_path:str, crop_size:tuple, stride:
         metadata["width"] = tif_array.shape[2]
         metadata["height"] = tif_array.shape[1]
         save_array_as_tif(tif_array, os.path.join(
-            save_image_path_root, f"{index}.tif"), metadata)
+            save_image_path_root, f"{index:0>4d}.tif"), metadata)
         print("\r保存进度(原图):{}/{}:{}".format(index+1, len(image_tif_array_list), "▋"*(int((index+1)/len(image_tif_array_list)*100)//2)),
               "%{:.1f}".format((index+1)/len(image_tif_array_list)*100),
               flush=True,
@@ -178,10 +178,10 @@ if __name__ == "__main__":
     big_tif_mask_path = "tif_image\splited_image_and_mask\mask_part1.tif"
 
     # 图片裁剪尺寸
-    crop_size = (512, 512)
+    crop_size = (256, 256)
     
     # 图片裁剪步长
-    stride = 512
+    stride = 256
 
     main(big_tif_image_path=big_tif_image_path,     # 原图路径
          big_tif_mask_path=big_tif_mask_path,       # 标签路径
